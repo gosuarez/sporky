@@ -2,9 +2,10 @@ import { useEffect, useState } from "react";
 import apiClient from "../services/api-client";
 import { CanceledError } from "axios";
 
-interface Recipe {
+export interface Recipe {
   id: number;
   title: string;
+  image: string;
 }
 
 interface FetchRecipesResponse {
