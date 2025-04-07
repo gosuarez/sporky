@@ -6,6 +6,9 @@ export interface Recipe {
   id: number;
   title: string;
   image: string;
+  readyInMinutes: number;
+  cheap: boolean;
+  servings: number;
 }
 
 interface FetchRecipesResponse {
@@ -25,6 +28,7 @@ const useRecipes = () => {
         params: {
           number: 20,
           sort: "random",
+          addRecipeInformation: true,
         },
         signal: controller.signal,
       })
