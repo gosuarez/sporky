@@ -7,8 +7,8 @@ export interface Recipe {
   title: string;
   image: string;
   readyInMinutes: number;
-  cheap: boolean;
   servings: number;
+  healthScore: number;
 }
 
 interface FetchRecipesResponse {

@@ -1,6 +1,7 @@
 import { Recipe } from "../hooks/useRecipes";
-import { Card, CardBody, Heading, Image } from "@chakra-ui/react";
+import { Card, CardBody, Heading, HStack, Image } from "@chakra-ui/react";
 import RecipeIconList from "./RecipeIconList";
+import HealthScore from "./HealthScore";
 
 interface Props {
   recipe: Recipe;
@@ -12,11 +13,13 @@ const RecipeCard = ({ recipe }: Props) => {
       <Image src={recipe.image} />
       <CardBody>
         <Heading fontSize="2xl">{recipe.title}</Heading>
-        <RecipeIconList
-          readyInMinutes={recipe.readyInMinutes}
-          cheap={recipe.cheap}
-          servings={recipe.servings}
-        />
+        <HStack justifyContent="space-between">
+          <RecipeIconList
+            readyInMinutes={recipe.readyInMinutes}
+            servings={recipe.servings}
+          />
+          <HealthScore score={recipe.healthScore} />
+        </HStack>
       </CardBody>
     </Card>
   );
