@@ -1,5 +1,5 @@
 import { SimpleGrid, Text } from "@chakra-ui/react";
-import useRecipes from "../hooks/useRecipes";
+import useRecipes from "../hooks/useRecipesBeforeGeneric";
 import RecipeCard from "./RecipeCard";
 import RecipeCardSkeleton from "./RecipeCardSkeleton";
 import RecipeCardContainer from "./RecipeCardContainer";

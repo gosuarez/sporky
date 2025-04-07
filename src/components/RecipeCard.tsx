@@ -1,4 +1,4 @@
-import { Recipe } from "../hooks/useRecipes";
+import { Recipe } from "../hooks/useRecipesBeforeGeneric";
 import { Card, CardBody, Heading, HStack, Image } from "@chakra-ui/react";
 import RecipeIconList from "./RecipeIconList";
 import HealthScore from "./HealthScore";
