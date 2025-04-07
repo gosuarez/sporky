@@ -19,10 +19,12 @@ interface FetchRecipesResponse {
 const useRecipes = () => {
   const [recipes, setRecipes] = useState<Recipe[]>([]);
   const [error, setError] = useState("");
+  const [isLoading, setLoading] = useState(false);
 
   useEffect(() => {
     const controller = new AbortController();
 
+    setLoading(true);
     apiClient
       .get<FetchRecipesResponse>("/recipes/complexSearch", {
         params: {
@@ -32,16 +34,22 @@ const useRecipes = () => {
         },
         signal: controller.signal,
       })
-      .then((res) => setRecipes(res.data.results))
+      .then((res) => {
+        setRecipes(res.data.results);
+        //TODO: Move this to the finally state
+        setLoading(false);
+      })
       .catch((err) => {
         if (err instanceof CanceledError) return;
         setError(err.message);
+        //TODO: Move this to the finally state
+        setLoading(false);
       });
 
     return () => controller.abort();
   }, []);
 
-  return { recipes, error };
+  return { recipes, error, isLoading };
 };
 
 export default useRecipes;
