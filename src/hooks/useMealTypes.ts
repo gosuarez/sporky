@@ -2,6 +2,7 @@
 export interface MealType {
   id: string;
   label: string;
+  image: string;
 }
 
 // NOTE: Hardcoded meal types from Spoonacular documentation as of April 2025
@@ -9,20 +10,76 @@ export interface MealType {
 
 const useMealTypes = () => {
   const mealTypes: MealType[] = [
-    { id: "main course", label: "Main Course" },
-    { id: "side dish", label: "Side Dish" },
-    { id: "dessert", label: "Dessert" },
-    { id: "appetizer", label: "Appetizer" },
-    { id: "salad", label: "Salad" },
-    { id: "bread", label: "Bread" },
-    { id: "breakfast", label: "Breakfast" },
-    { id: "soup", label: "Soup" },
-    { id: "beverage", label: "Beverage" },
-    { id: "sauce", label: "Sauce" },
-    { id: "marinade", label: "Marinade" },
-    { id: "fingerfood", label: "Fingerfood" },
-    { id: "snack", label: "Snack" },
-    { id: "drink", label: "Drink" },
+    {
+      id: "main course",
+      label: "Main Course",
+      image: "/assets/meal-types/main-course.jpg",
+    },
+    {
+      id: "side dish",
+      label: "Side Dish",
+      image: "/assets/meal-types/side-dish.jpg",
+    },
+    {
+      id: "dessert",
+      label: "Dessert",
+      image: "/assets/meal-types/dessert.jpg",
+    },
+    {
+      id: "appetizer",
+      label: "Appetizer",
+      image: "/assets/meal-types/appetizer.jpg",
+    },
+    {
+      id: "salad",
+      label: "Salad",
+      image: "/assets/meal-types/salad.jpg",
+    },
+    {
+      id: "bread",
+      label: "Bread",
+      image: "/assets/meal-types/bread.jpg",
+    },
+    {
+      id: "breakfast",
+      label: "Breakfast",
+      image: "/assets/meal-types/breakfast.jpg",
+    },
+    {
+      id: "soup",
+      label: "Soup",
+      image: "/assets/meal-types/soup.jpg",
+    },
+    {
+      id: "beverage",
+      label: "Beverage",
+      image: "/assets/meal-types/beverage.jpg",
+    },
+    {
+      id: "sauce",
+      label: "Sauce",
+      image: "/assets/meal-types/sauce.jpg",
+    },
+    {
+      id: "marinade",
+      label: "Marinade",
+      image: "/assets/meal-types/marinade.jpg",
+    },
+    {
+      id: "fingerfood",
+      label: "Fingerfood",
+      image: "/assets/meal-types/fingerfood.jpg",
+    },
+    {
+      id: "snack",
+      label: "Snack",
+      image: "/assets/meal-types/snack.jpg",
+    },
+    {
+      id: "drink",
+      label: "Drink",
+      image: "/assets/meal-types/drink.jpg",
+    },
   ];
 
   return mealTypes;

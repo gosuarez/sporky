@@ -1,14 +1,20 @@
+import { HStack, Image, List, ListItem, Text } from "@chakra-ui/react";
 import useMealTypes from "../hooks/useMealTypes";
 
 const MealTypeList = () => {
   const mealTypes = useMealTypes();
 
   return (
-    <ul>
+    <List>
       {mealTypes.map((type) => (
-        <li key={type.id}>{type.label}</li>
+        <ListItem key={type.id} paddingY="5px">
+          <HStack>
+            <Image boxSize="32px" borderRadius={8} src={type.image}></Image>
+            <Text fontSize="lg">{type.label}</Text>
+          </HStack>
+        </ListItem>
       ))}
-    </ul>
+    </List>
   );
 };
 
