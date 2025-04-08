@@ -1,6 +1,5 @@
+import { RecipeQuery } from "../App";
 import useData from "./useData";
-import { Diet } from "./useDiets";
-import { MealType } from "./useMealTypes";
 
 export interface Recipe {
   id: number;
@@ -12,8 +11,7 @@ export interface Recipe {
 }
 
 const useRecipes = (
-  selectedMealType: MealType | null,
-  selectedDiet: Diet | null
+  recipeQuery: RecipeQuery
 ) =>
   useData<Recipe>(
     "/recipes/complexSearch",
@@ -22,11 +20,11 @@ const useRecipes = (
         number: 20,
         sort: "random",
         addRecipeInformation: true,
-        type: selectedMealType?.id,
-        diet: selectedDiet?.id,
+        type: recipeQuery.type?.id,
+        diet: recipeQuery.diet?.id,
       },
     },
-    [selectedMealType?.id, selectedDiet?.id]
+    [recipeQuery]
   );
 
 export default useRecipes;

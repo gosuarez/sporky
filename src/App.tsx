@@ -7,11 +7,15 @@ import { MealType } from "./hooks/useMealTypes";
 import DietSelector from "./components/DietSelector";
 import { Diet } from "./hooks/useDiets";
 
+export interface RecipeQuery {
+  type: MealType | null;
+  diet: Diet | null;
+}
+
 function App() {
-  const [selectedMealType, setSelectedMealType] = useState<MealType | null>(
-    null
+  const [recipeQuery, setRecipeQuery] = useState<RecipeQuery>(
+    {} as RecipeQuery
   );
-  const [selectedDiet, setSelectedDiet] = useState<Diet | null>(null);
 
   return (
     <Grid
@@ -30,14 +34,17 @@ function App() {
       <Show above="lg">
         <GridItem area="aside" paddingX={5}>
           <MealTypeList
-            selectedMealType={selectedMealType}
-            onSelectMeal={(type) => setSelectedMealType(type)}
+            selectedMealType={recipeQuery.type}
+            onSelectMeal={(type) => setRecipeQuery({ ...recipeQuery, type })}
           />
         </GridItem>
       </Show>
       <GridItem area="main">
-        <DietSelector selectedDiet={selectedDiet} onSelectDiet={(diet) => setSelectedDiet(diet)} />
-        <RecipeGrid selectedMealType={selectedMealType} selectedDiet={selectedDiet} />
+        <DietSelector
+          selectedDiet={recipeQuery.diet}
+          onSelectDiet={(diet) => setRecipeQuery({ ...recipeQuery, diet })}
+        />
+        <RecipeGrid recipeQuery={recipeQuery} />
       </GridItem>
     </Grid>
   );
