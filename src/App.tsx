@@ -4,6 +4,7 @@ import RecipeGrid from "./components/RecipeGrid";
 import MealTypeList from "./components/MealTypeList";
 import { useState } from "react";
 import { MealType } from "./hooks/useMealTypes";
+import DietSelector from "./components/DietSelector";
 
 function App() {
   const [selectedMealType, setSelectedMealType] = useState<MealType | null>(null);
@@ -28,6 +29,7 @@ function App() {
         </GridItem>
       </Show>
       <GridItem area="main">
+        <DietSelector />
         <RecipeGrid selectedMealType={selectedMealType} />
       </GridItem>
     </Grid>

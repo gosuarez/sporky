@@ -26,12 +26,19 @@ const useData = <T>(
           signal: controller.signal,
           ...requestConfig,
         })
-        .then((res) => setData(res.data.results))
+        .then((res) => {
+          setData(res.data.results);
+          //TODO: remove in production
+          setLoading(false);
+        })
         .catch((err) => {
           if (err instanceof CanceledError) return;
           setError(err.message);
-        })
-        .finally(() => setLoading(false));
+          //TODO: remove in production
+          setLoading(false);
+        });
+      //TODO: activate in production
+      // .finally(() => setLoading(false));
 
       return () => controller.abort();
     },

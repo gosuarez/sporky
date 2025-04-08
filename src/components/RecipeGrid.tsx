@@ -16,6 +16,7 @@ const RecipeGrid = ({ selectedMealType }: Props) => {
 
   return (
     <>
+      {/* //TODO: Improve the response if api requests have reached 0 */}
       {error && <Text>{error}</Text>}
       <SimpleGrid
         columns={{ sm: 1, md: 2, lg: 3, xl: 5 }}

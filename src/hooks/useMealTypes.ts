@@ -1,4 +1,3 @@
-// hooks/useMealTypes.ts
 export interface MealType {
   id: string;
   label: string;
