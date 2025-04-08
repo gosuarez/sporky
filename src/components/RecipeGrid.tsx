@@ -4,13 +4,15 @@ import RecipeCard from "./RecipeCard";
 import RecipeCardSkeleton from "./RecipeCardSkeleton";
 import RecipeCardContainer from "./RecipeCardContainer";
 import { MealType } from "../hooks/useMealTypes";
+import { Diet } from "../hooks/useDiets";
 
 interface Props {
   selectedMealType: MealType | null;
+  selectedDiet: Diet | null;
 }
 
-const RecipeGrid = ({ selectedMealType }: Props) => {
-  const { data, error, isLoading } = useRecipes(selectedMealType);
+const RecipeGrid = ({ selectedMealType, selectedDiet }: Props) => {
+  const { data, error, isLoading } = useRecipes(selectedMealType, selectedDiet);
 
   const skeletons = [1, 2, 3, 4, 5, 6];
 

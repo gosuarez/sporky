@@ -5,13 +5,17 @@ import MealTypeList from "./components/MealTypeList";
 import { useState } from "react";
 import { MealType } from "./hooks/useMealTypes";
 import DietSelector from "./components/DietSelector";
+import { Diet } from "./hooks/useDiets";
 
 function App() {
-  const [selectedMealType, setSelectedMealType] = useState<MealType | null>(null);
+  const [selectedMealType, setSelectedMealType] = useState<MealType | null>(
+    null
+  );
+  const [selectedDiet, setSelectedDiet] = useState<Diet | null>(null);
 
   return (
     <Grid
-      templateAreas={{  
+      templateAreas={{
         base: `"nav" "main"`,
         lg: `"nav nav" "aside main"`,
       }}
@@ -25,12 +29,15 @@ function App() {
       </GridItem>
       <Show above="lg">
         <GridItem area="aside" paddingX={5}>
-          <MealTypeList selectedMealType={selectedMealType} onSelectMeal={(type) => setSelectedMealType(type)} />
+          <MealTypeList
+            selectedMealType={selectedMealType}
+            onSelectMeal={(type) => setSelectedMealType(type)}
+          />
         </GridItem>
       </Show>
       <GridItem area="main">
-        <DietSelector />
-        <RecipeGrid selectedMealType={selectedMealType} />
+        <DietSelector selectedDiet={selectedDiet} onSelectDiet={(diet) => setSelectedDiet(diet)} />
+        <RecipeGrid selectedMealType={selectedMealType} selectedDiet={selectedDiet} />
       </GridItem>
     </Grid>
   );

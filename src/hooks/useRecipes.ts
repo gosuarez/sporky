@@ -1,4 +1,5 @@
 import useData from "./useData";
+import { Diet } from "./useDiets";
 import { MealType } from "./useMealTypes";
 
 export interface Recipe {
@@ -10,7 +11,10 @@ export interface Recipe {
   healthScore: number;
 }
 
-const useRecipes = (selectedMealType: MealType | null) =>
+const useRecipes = (
+  selectedMealType: MealType | null,
+  selectedDiet: Diet | null
+) =>
   useData<Recipe>(
     "/recipes/complexSearch",
     {
@@ -19,9 +23,10 @@ const useRecipes = (selectedMealType: MealType | null) =>
         sort: "random",
         addRecipeInformation: true,
         type: selectedMealType?.id,
+        diet: selectedDiet?.id,
       },
     },
-    [selectedMealType?.id]
+    [selectedMealType?.id, selectedDiet?.id]
   );
 
 export default useRecipes;
