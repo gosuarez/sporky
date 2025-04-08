@@ -24,7 +24,7 @@ function App() {
       </GridItem>
       <Show above="lg">
         <GridItem area="aside" paddingX={5}>
-          <MealTypeList onSelectMeal={(type) => setSelectedMealType(type)} />
+          <MealTypeList selectedMealType={selectedMealType} onSelectMeal={(type) => setSelectedMealType(type)} />
         </GridItem>
       </Show>
       <GridItem area="main">

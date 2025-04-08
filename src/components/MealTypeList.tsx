@@ -3,9 +3,10 @@ import useMealTypes, { MealType } from "../hooks/useMealTypes";
 
 interface Props {
   onSelectMeal: (type: MealType) => void;
+  selectedMealType: MealType | null;
 }
 
-const MealTypeList = ({ onSelectMeal }: Props) => {
+const MealTypeList = ({ selectedMealType, onSelectMeal }: Props) => {
   const mealTypes = useMealTypes();
 
   return (
@@ -15,6 +16,7 @@ const MealTypeList = ({ onSelectMeal }: Props) => {
           <HStack>
             <Image boxSize="32px" borderRadius={8} src={type.image}></Image>
             <Button
+              fontWeight={type.id === selectedMealType?.id ? "bold" : "normal"}
               onClick={() => onSelectMeal(type)}
               fontSize="lg"
               variant="link"
