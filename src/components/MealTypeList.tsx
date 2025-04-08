@@ -1,7 +1,11 @@
-import { HStack, Image, List, ListItem, Text } from "@chakra-ui/react";
-import useMealTypes from "../hooks/useMealTypes";
+import { HStack, Image, List, ListItem, Button } from "@chakra-ui/react";
+import useMealTypes, { MealType } from "../hooks/useMealTypes";
 
-const MealTypeList = () => {
+interface Props {
+  onSelectMeal: (type: MealType) => void;
+}
+
+const MealTypeList = ({ onSelectMeal }: Props) => {
   const mealTypes = useMealTypes();
 
   return (
@@ -10,7 +14,13 @@ const MealTypeList = () => {
         <ListItem key={type.id} paddingY="5px">
           <HStack>
             <Image boxSize="32px" borderRadius={8} src={type.image}></Image>
-            <Text fontSize="lg">{type.label}</Text>
+            <Button
+              onClick={() => onSelectMeal(type)}
+              fontSize="lg"
+              variant="link"
+            >
+              {type.label}
+            </Button>
           </HStack>
         </ListItem>
       ))}

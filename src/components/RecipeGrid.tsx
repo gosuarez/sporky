@@ -1,11 +1,16 @@
 import { SimpleGrid, Text } from "@chakra-ui/react";
-import useRecipes from "../hooks/useRecipesBeforeGeneric";
+import useRecipes from "../hooks/useRecipes";
 import RecipeCard from "./RecipeCard";
 import RecipeCardSkeleton from "./RecipeCardSkeleton";
 import RecipeCardContainer from "./RecipeCardContainer";
+import { MealType } from "../hooks/useMealTypes";
 
-const RecipeGrid = () => {
-  const { recipes, error, isLoading } = useRecipes();
+interface Props {
+  selectedMealType: MealType | null;
+}
+
+const RecipeGrid = ({ selectedMealType }: Props) => {
+  const { data, error, isLoading } = useRecipes(selectedMealType);
 
   const skeletons = [1, 2, 3, 4, 5, 6];
 
@@ -19,13 +24,13 @@ const RecipeGrid = () => {
       >
         {isLoading &&
           skeletons.map((skeleton) => (
-            <RecipeCardContainer>
-              <RecipeCardSkeleton key={skeleton} />
+            <RecipeCardContainer key={skeleton}>
+              <RecipeCardSkeleton />
             </RecipeCardContainer>
           ))}
-        {recipes.map((recipe) => (
-          <RecipeCardContainer>
-            <RecipeCard key={recipe.id} recipe={recipe} />
+        {data.map((recipe) => (
+          <RecipeCardContainer key={recipe.id}>
+            <RecipeCard recipe={recipe} />
           </RecipeCardContainer>
         ))}
       </SimpleGrid>

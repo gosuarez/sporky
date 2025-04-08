@@ -1,4 +1,5 @@
 import useData from "./useData";
+import { MealType } from "./useMealTypes";
 
 export interface Recipe {
   id: number;
@@ -9,11 +10,18 @@ export interface Recipe {
   healthScore: number;
 }
 
-const useRecipes = () =>
-  useData<Recipe>("/recipes/complexSearch", {
-    number: 20,
-    sort: "random",
-    addRecipeInformation: true,
-  });
+const useRecipes = (selectedMealType: MealType | null) =>
+  useData<Recipe>(
+    "/recipes/complexSearch",
+    {
+      params: {
+        number: 20,
+        sort: "random",
+        addRecipeInformation: true,
+        type: selectedMealType?.id,
+      },
+    },
+    [selectedMealType?.id]
+  );
 
 export default useRecipes;
