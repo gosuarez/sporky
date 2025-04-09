@@ -13,6 +13,7 @@ export interface RecipeQuery {
   type: MealType | null;
   diet: Diet | null;
   sort: Sort | null;
+  searchText: string;
 }
 
 function App() {
@@ -32,7 +33,11 @@ function App() {
       }}
     >
       <GridItem area="nav">
-        <NavBar />
+        <NavBar
+          onSearch={(searchText) =>
+            setRecipeQuery({ ...recipeQuery, searchText })
+          }
+        />
       </GridItem>
       <Show above="lg">
         <GridItem area="aside" paddingX={5}>

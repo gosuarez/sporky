@@ -3,9 +3,18 @@ import logo from "../assets/gastrolab.webp";
 import ColorModeSwitch from "./ColorModeSwitch";
 import SearchInput from "./SearchInput";
 
-const NavBar = () => {
+interface Props {
+  onSearch: (searchText: string) => void;
+}
+
+const NavBar = ({ onSearch }: Props) => {
   return (
-    <Flex direction="column" padding="10px" paddingY="20px" gap={{ base: 3, md: 0 }}>
+    <Flex
+      direction="column"
+      padding="10px"
+      paddingY="20px"
+      gap={{ base: 3, md: 0 }}
+    >
       <Flex
         direction="row"
         align="center"
@@ -25,14 +34,14 @@ const NavBar = () => {
           </Text>
         </HStack>
         <Box flex="1" display={{ base: "none", md: "block" }}>
-          <SearchInput />
+          <SearchInput onSearch={onSearch} />
         </Box>
         <Box flexShrink={0}>
           <ColorModeSwitch />
         </Box>
       </Flex>
       <Box display={{ base: "block", md: "none" }}>
-        <SearchInput />
+        <SearchInput onSearch={onSearch} />
       </Box>
     </Flex>
   );

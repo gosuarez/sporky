@@ -10,9 +10,7 @@ export interface Recipe {
   healthScore: number;
 }
 
-const useRecipes = (
-  recipeQuery: RecipeQuery
-) =>
+const useRecipes = (recipeQuery: RecipeQuery) =>
   useData<Recipe>(
     "/recipes/complexSearch",
     {
@@ -22,6 +20,7 @@ const useRecipes = (
         type: recipeQuery.type?.id,
         diet: recipeQuery.diet?.id,
         sort: recipeQuery.sort?.id,
+        query: recipeQuery.searchText,
       },
     },
     [recipeQuery]
