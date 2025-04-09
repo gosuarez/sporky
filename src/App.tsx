@@ -43,7 +43,7 @@ function App() {
         </GridItem>
       </Show>
       <GridItem area="main">
-        <HStack spacing={5} paddingLeft={2} marginBottom={5}>
+        <HStack spacing={2} paddingLeft={2} marginBottom={4}>
           <DietSelector
             selectedDiet={recipeQuery.diet}
             onSelectDiet={(diet) => setRecipeQuery({ ...recipeQuery, diet })}
