@@ -1,4 +1,4 @@
-import { Box, Flex, HStack, Image, Text } from "@chakra-ui/react";
+import { Box, Flex, HStack, Image, Link, Text } from "@chakra-ui/react";
 import logo from "../assets/gastrolab.webp";
 import ColorModeSwitch from "./ColorModeSwitch";
 import SearchInput from "./SearchInput";
@@ -23,16 +23,18 @@ const NavBar = ({ onSearch }: Props) => {
         wrap="wrap"
         gap={4}
       >
-        <HStack spacing={2} flexShrink={0}>
-          <Image src={logo} boxSize="50px" />
-          <Text
-            fontSize={{ base: "lg", sm: "2xl" }}
-            fontWeight="extrabold"
-            fontFamily="cursive"
-          >
-            GastroLab
-          </Text>
-        </HStack>
+        <Link href="/" _hover={{ textDecoration: "none" }}>
+          <HStack spacing={2} flexShrink={0}>
+            <Image src={logo} boxSize="50px" />
+            <Text
+              fontSize={{ base: "lg", sm: "2xl" }}
+              fontWeight="extrabold"
+              fontFamily="cursive"
+            >
+              GastroLab
+            </Text>
+          </HStack>
+        </Link>
         <Box flex="1" display={{ base: "none", md: "block" }}>
           <SearchInput onSearch={onSearch} />
         </Box>

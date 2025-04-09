@@ -1,4 +1,4 @@
-import { Grid, GridItem, HStack, Show } from "@chakra-ui/react";
+import { Box, Grid, GridItem, HStack, Show } from "@chakra-ui/react";
 import NavBar from "./components/NavBar";
 import RecipeGrid from "./components/RecipeGrid";
 import MealTypeList from "./components/MealTypeList";
@@ -8,6 +8,7 @@ import DietSelector from "./components/DietSelector";
 import { Diet } from "./hooks/useDiets";
 import SortSelector from "./components/SortSelector";
 import { Sort } from "./hooks/useSort";
+import RecipeHeading from "./components/RecipeHeading";
 
 export interface RecipeQuery {
   type: MealType | null;
@@ -48,18 +49,21 @@ function App() {
         </GridItem>
       </Show>
       <GridItem area="main">
-        <HStack spacing={2} paddingLeft={2} marginBottom={4}>
-          <DietSelector
-            selectedDiet={recipeQuery.diet}
-            onSelectDiet={(diet) => setRecipeQuery({ ...recipeQuery, diet })}
-          />
-          <SortSelector
-            selectedOrder={recipeQuery.sort}
-            onSelectSortOrder={(sort) =>
-              setRecipeQuery({ ...recipeQuery, sort })
-            }
-          />
-        </HStack>
+        <Box paddingLeft={2}>
+          <RecipeHeading recipeQuery={recipeQuery} />
+          <HStack spacing={2} marginBottom={4}>
+            <DietSelector
+              selectedDiet={recipeQuery.diet}
+              onSelectDiet={(diet) => setRecipeQuery({ ...recipeQuery, diet })}
+            />
+            <SortSelector
+              selectedOrder={recipeQuery.sort}
+              onSelectSortOrder={(sort) =>
+                setRecipeQuery({ ...recipeQuery, sort })
+              }
+            />
+          </HStack>
+        </Box>
         <RecipeGrid recipeQuery={recipeQuery} />
       </GridItem>
     </Grid>
