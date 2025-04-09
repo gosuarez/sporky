@@ -17,6 +17,7 @@ const useDiets = () => {
     { id: "pescetarian", label: "Pescetarian" },
     { id: "paleo", label: "Paleo" },
     { id: "primal", label: "Primal" },
+    { id: "low fodmap", label: "Low FODMAP" },
     { id: "whole30", label: "Whole30" },
   ];
 

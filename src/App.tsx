@@ -1,4 +1,4 @@
-import { Grid, GridItem, Show } from "@chakra-ui/react";
+import { Grid, GridItem, HStack, Show } from "@chakra-ui/react";
 import NavBar from "./components/NavBar";
 import RecipeGrid from "./components/RecipeGrid";
 import MealTypeList from "./components/MealTypeList";
@@ -6,6 +6,7 @@ import { useState } from "react";
 import { MealType } from "./hooks/useMealTypes";
 import DietSelector from "./components/DietSelector";
 import { Diet } from "./hooks/useDiets";
+import SortSelector from "./components/SortSelector";
 
 export interface RecipeQuery {
   type: MealType | null;
@@ -40,10 +41,13 @@ function App() {
         </GridItem>
       </Show>
       <GridItem area="main">
-        <DietSelector
-          selectedDiet={recipeQuery.diet}
-          onSelectDiet={(diet) => setRecipeQuery({ ...recipeQuery, diet })}
-        />
+        <HStack spacing={5} paddingLeft={2} marginBottom={5}>
+          <DietSelector
+            selectedDiet={recipeQuery.diet}
+            onSelectDiet={(diet) => setRecipeQuery({ ...recipeQuery, diet })}
+          />
+          <SortSelector />
+        </HStack>
         <RecipeGrid recipeQuery={recipeQuery} />
       </GridItem>
     </Grid>
