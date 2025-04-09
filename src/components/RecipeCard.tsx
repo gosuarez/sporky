@@ -11,19 +11,16 @@ interface Props {
 const RecipeCard = ({ recipe }: Props) => {
   return (
     <Card>
-      <Image
-        src={recipe.image}
-        fallbackSrc={placeholder}
-      />
+      <Image src={recipe.image} fallbackSrc={placeholder} />
       <CardBody>
-        <Heading fontSize="2xl">{recipe.title}</Heading>
-        <HStack justifyContent="space-between">
+        <HStack justifyContent="space-between" marginBottom={3}>
           <RecipeIconList
             readyInMinutes={recipe.readyInMinutes}
             servings={recipe.servings}
           />
           <HealthScore score={recipe.healthScore} />
         </HStack>
+        <Heading fontSize="2xl">{recipe.title}</Heading>
       </CardBody>
     </Card>
   );
