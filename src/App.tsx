@@ -7,10 +7,12 @@ import { MealType } from "./hooks/useMealTypes";
 import DietSelector from "./components/DietSelector";
 import { Diet } from "./hooks/useDiets";
 import SortSelector from "./components/SortSelector";
+import { Sort } from "./hooks/useSort";
 
 export interface RecipeQuery {
   type: MealType | null;
   diet: Diet | null;
+  sort: Sort | null;
 }
 
 function App() {
@@ -46,7 +48,12 @@ function App() {
             selectedDiet={recipeQuery.diet}
             onSelectDiet={(diet) => setRecipeQuery({ ...recipeQuery, diet })}
           />
-          <SortSelector />
+          <SortSelector
+            selectedOrder={recipeQuery.sort}
+            onSelectSortOrder={(sort) =>
+              setRecipeQuery({ ...recipeQuery, sort })
+            }
+          />
         </HStack>
         <RecipeGrid recipeQuery={recipeQuery} />
       </GridItem>

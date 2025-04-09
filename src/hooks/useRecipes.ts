@@ -18,10 +18,10 @@ const useRecipes = (
     {
       params: {
         number: 20,
-        sort: "random",
         addRecipeInformation: true,
         type: recipeQuery.type?.id,
         diet: recipeQuery.diet?.id,
+        sort: recipeQuery.sort?.id,
       },
     },
     [recipeQuery]
