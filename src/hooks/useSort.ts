@@ -8,6 +8,7 @@ export interface Sort {
 
 const useSort = () => {
   const sorts: Sort[] = [
+    { id: "", label: "Relevance" },
     { id: "popularity", label: "Popularity" },
     { id: "healthiness", label: "Healthiness" },
     { id: "price", label: "Price" },
@@ -17,7 +18,7 @@ const useSort = () => {
     { id: "fiber", label: "Fiber" },
   ];
 
-  return sorts.sort((a, b) => a.label.localeCompare(b.label));
+  return sorts;
 };
 
 export default useSort;
