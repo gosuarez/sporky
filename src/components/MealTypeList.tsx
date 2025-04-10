@@ -16,35 +16,48 @@ interface Props {
 
 const MealTypeList = ({ selectedMealType, onSelectMeal }: Props) => {
   const mealTypes = useMealTypes();
-  const labelColor = useColorModeValue("gray.800", "gray.100");
+  const mealLabelColor = useColorModeValue("#2e2a27", "#e9e4d2");
 
   return (
     <>
-      <Heading fontSize="2xl" marginBottom={3}>Meals</Heading>
+      <Heading fontSize="2xl" marginBottom={3}>
+        Meals
+      </Heading>
       <List>
-        {mealTypes.map((type) => (
-          <ListItem key={type.id} paddingY="5px">
-            <HStack>
-              <Image
-                boxSize="42px"
-                objectFit="cover"
-                borderRadius={8}
-                src={type.image}
-              ></Image>
-              <Button
-                fontWeight={
-                  type.id === selectedMealType?.id ? "bold" : "normal"
-                }
+        {mealTypes.map((type) => {
+          const isSelected = type.id === selectedMealType?.id;
+
+          return (
+            <ListItem key={type.id} paddingY="5px">
+              <HStack
+                cursor="pointer"
                 onClick={() => onSelectMeal(type)}
-                fontSize="lg"
-                variant="link"
-                color={labelColor}
+                spacing={3}
               >
-                {type.label}
-              </Button>
-            </HStack>
-          </ListItem>
-        ))}
+                <Image
+                  boxSize="42px"
+                  objectFit="cover"
+                  borderRadius={8}
+                  src={type.image}
+                  boxShadow={`0 0 0 2px ${mealLabelColor}`}
+                  transition="transform 0.2s ease, box-shadow 0.2s ease"
+                  _hover={{
+                    transform: "scale(1.05)",
+                  }}
+                />
+                <Button
+                  fontWeight={isSelected ? "bold" : "normal"}
+                  fontSize="lg"
+                  variant="link"
+                  color={mealLabelColor}
+                  onClick={() => onSelectMeal(type)}
+                >
+                  {type.label}
+                </Button>
+              </HStack>
+            </ListItem>
+          );
+        })}
       </List>
     </>
   );
