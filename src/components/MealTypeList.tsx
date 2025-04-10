@@ -3,6 +3,7 @@ import {
   Image,
   List,
   ListItem,
+  useColorModeValue,
   Button,
   Heading,
 } from "@chakra-ui/react";
@@ -15,6 +16,7 @@ interface Props {
 
 const MealTypeList = ({ selectedMealType, onSelectMeal }: Props) => {
   const mealTypes = useMealTypes();
+  const labelColor = useColorModeValue("gray.800", "gray.100");
 
   return (
     <>
@@ -36,6 +38,7 @@ const MealTypeList = ({ selectedMealType, onSelectMeal }: Props) => {
                 onClick={() => onSelectMeal(type)}
                 fontSize="lg"
                 variant="link"
+                color={labelColor}
               >
                 {type.label}
               </Button>
