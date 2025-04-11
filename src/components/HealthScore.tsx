@@ -1,14 +1,29 @@
-import { Badge } from "@chakra-ui/react";
+import { Badge, Box } from "@chakra-ui/react";
+import { GiHeartPlus } from "react-icons/gi";
 
 interface Props {
   score: number;
 }
 
 const HealthScore = ({ score }: Props) => {
-  const color = score > 75 ? "green" : score > 60 ? "yellow" : "";
+  function getHealthColor(score: number): string {
+    if (score > 85) return "green";
+    if (score > 70) return "yellow";
+    if (score > 50) return "orange";
+    return "red";
+  }
 
   return (
-    <Badge colorScheme={color} fontSize="14px" paddingX={2} borderRadius="4px">
+    <Badge
+      colorScheme={getHealthColor(score)}
+      fontSize="14px"
+      paddingX={2}
+      borderRadius="4px"
+      display="flex"
+      alignItems="center"
+      gap={1}
+    >
+      <Box as={GiHeartPlus} boxSize="14px" />
       {score}
     </Badge>
   );
