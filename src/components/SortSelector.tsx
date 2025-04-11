@@ -12,7 +12,13 @@ const SortSelector = ({ onSelectSortOrder, selectedOrder }: Props) => {
 
   return (
     <Menu>
-      <MenuButton as={Button} rightIcon={<BsChevronDown />}>
+      <MenuButton
+        as={Button}
+        rightIcon={<BsChevronDown />}
+        paddingX={{ base: 2.5, md: 5 }}
+        paddingY={{ base: 1.5, md: 2.5 }}
+        fontSize={{ base: "xs", sm: "sm", md: "md" }}
+      >
         Order by: {selectedOrder?.label || "Relevance"}
       </MenuButton>
       <MenuList>

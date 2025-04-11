@@ -39,7 +39,7 @@ const NavBar = ({ onSearch }: Props) => {
           <ColorModeSwitch />
         </Box>
       </Flex>
-      <Box display={{ base: "block", md: "none" }}>
+      <Box marginTop={3} display={{ base: "block", md: "none" }}>
         <SearchInput onSearch={onSearch} />
       </Box>
     </Flex>

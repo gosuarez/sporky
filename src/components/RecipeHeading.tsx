@@ -11,7 +11,7 @@ const RecipeHeading = ({ recipeQuery }: Props) => {
   } Recipes`;
 
   return (
-    <Heading as="h1" marginBottom={5} fontSize="5xl">
+    <Heading as="h1" marginBottom={5} fontSize={{ base: "2xl", sm: "3xl", md: "4xl", lg: "5xl" }}>
       {heading}
     </Heading>
   );
