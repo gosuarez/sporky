@@ -1,5 +1,5 @@
-import { Box, Flex, HStack, Image, Link, Text } from "@chakra-ui/react";
-import logo from "../assets/gastrolab.webp";
+import { Box, Flex, Link, useColorModeValue } from "@chakra-ui/react";
+import LogoIcon from "../assets/logo.svg?react";
 import ColorModeSwitch from "./ColorModeSwitch";
 import SearchInput from "./SearchInput";
 
@@ -8,6 +8,8 @@ interface Props {
 }
 
 const NavBar = ({ onSearch }: Props) => {
+  const logoColor = useColorModeValue("#2e2a27", "#e9e4d2");
+
   return (
     <Flex
       direction="column"
@@ -24,20 +26,15 @@ const NavBar = ({ onSearch }: Props) => {
         gap={4}
       >
         <Link href="/" _hover={{ textDecoration: "none" }}>
-          <HStack spacing={2} flexShrink={0}>
-            <Image src={logo} boxSize="50px" />
-            <Text
-              fontSize={{ base: "lg", sm: "2xl" }}
-              fontWeight="extrabold"
-              fontFamily="cursive"
-            >
-              GastroLab
-            </Text>
-          </HStack>
+          <Box height="55px" width="auto" color={logoColor}>
+            <LogoIcon style={{ height: "100%", width: "auto" }} />
+          </Box>
         </Link>
+
         <Box flex="1" display={{ base: "none", md: "block" }}>
           <SearchInput onSearch={onSearch} />
         </Box>
+
         <Box flexShrink={0}>
           <ColorModeSwitch />
         </Box>
