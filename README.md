@@ -42,15 +42,17 @@
 
 ### Installation
 
-Clone the repo and install dependencies:
+1. Clone the repo and install dependencies:
 
 ```bash
 git clone https://github.com/gosuarez/sporky.git
 cd sporky
 npm install
 ```
+2. Get a [spoonacular API Key](https://spoonacular.com/food-api). You'll have to create an account firts.
+3. Add the API key to `src/services/api-client.ts` or `.env` file.
 
-### Running the App Locally
+### Running the App Locally 
 
 ```bash
 npm run dev

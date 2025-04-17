@@ -1,8 +1,8 @@
-import { Recipe } from "../hooks/useRecipesBeforeGeneric";
 import { Card, CardBody, Heading, HStack, Image } from "@chakra-ui/react";
 import RecipeIconList from "./RecipeIconList";
 import HealthScore from "./HealthScore";
 import placeholder from "../assets/no-image-placeholder.webp"
+import { Recipe } from "../hooks/useRecipes";
 
 interface Props {
   recipe: Recipe;
