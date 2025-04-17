@@ -3,6 +3,11 @@ import axios, {
   InternalAxiosRequestConfig,
 } from "axios";
 
+export interface FetchResponse<T> {
+  number: number;
+  results: T[];
+}
+
 // Load all API keys from environment variables
 const API_KEYS = [
   import.meta.env.VITE_SPOONACULAR_API_KEY_1,

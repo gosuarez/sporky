@@ -1,5 +1,7 @@
+import { useQuery } from "@tanstack/react-query";
 import { RecipeQuery } from "../App";
-import useData from "./useData";
+import apiClient, { FetchResponse } from "../services/api-client";
+
 
 export interface Recipe {
   id: number;
@@ -11,19 +13,21 @@ export interface Recipe {
 }
 
 const useRecipes = (recipeQuery: RecipeQuery) =>
-  useData<Recipe>(
-    "/recipes/complexSearch",
-    {
-      params: {
-        number: 20,
-        addRecipeInformation: true,
-        type: recipeQuery.type?.id,
-        diet: recipeQuery.diet?.id,
-        sort: recipeQuery.sort?.id,
-        query: recipeQuery.searchText,
-      },
-    },
-    [recipeQuery]
-  );
+  useQuery<FetchResponse<Recipe>, Error>({
+    queryKey: ["recipes", recipeQuery],
+    queryFn: () =>
+      apiClient
+        .get<FetchResponse<Recipe>>("/recipes/complexSearch", {
+          params: {
+            number: 20,
+            addRecipeInformation: true,
+            type: recipeQuery.type?.id,
+            diet: recipeQuery.diet?.id,
+            sort: recipeQuery.sort?.id,
+            query: recipeQuery.searchText,
+          },
+        })
+        .then((res) => res.data),
+  });
 
 export default useRecipes;

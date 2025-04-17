@@ -28,7 +28,7 @@ const RecipeGrid = ({ recipeQuery }: Props) => {
             <RecipeCardSkeleton />
           </RecipeCardContainer>
         ))}
-      {data.map((recipe) => (
+      {data?.results.map((recipe) => (
         <RecipeCardContainer key={recipe.id}>
           <RecipeCard recipe={recipe} />
         </RecipeCardContainer>
