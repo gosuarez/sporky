@@ -7,6 +7,8 @@ import { getNextApiKey } from "./apiKeyManager";
 
 export interface FetchResponse<T> {
   number: number;
+  offset: number;
+  totalResults: number;
   results: T[];
 }
 

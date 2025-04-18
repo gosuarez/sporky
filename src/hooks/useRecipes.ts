@@ -1,8 +1,9 @@
-import { useQuery } from "@tanstack/react-query";
+import { useInfiniteQuery } from "@tanstack/react-query";
 import { RecipeQuery } from "../App";
 import APIClient, { FetchResponse } from "../services/apiClient";
 
 const apiClient = new APIClient<Recipe>("/recipes/complexSearch");
+const PAGE_SIZE = 10;
 
 export interface Recipe {
   id: number;
@@ -14,12 +15,14 @@ export interface Recipe {
 }
 
 const useRecipes = (recipeQuery: RecipeQuery) =>
-  useQuery<FetchResponse<Recipe>, Error>({
+  useInfiniteQuery<FetchResponse<Recipe>, Error>({
     queryKey: ["recipes", recipeQuery],
-    queryFn: () =>
+    initialPageParam: 0,
+    queryFn: ({ pageParam = 0 }) =>
       apiClient.getAll({
         params: {
-          number: 20,
+          number: PAGE_SIZE,
+          offset: pageParam,
           addRecipeInformation: true,
           type: recipeQuery.type?.id,
           diet: recipeQuery.diet?.id,
@@ -27,6 +30,14 @@ const useRecipes = (recipeQuery: RecipeQuery) =>
           query: recipeQuery.searchText,
         },
       }),
+    getNextPageParam: (lastPage, allPages) => {
+      const totalFetched = allPages.reduce(
+        (sum, page) => sum + page.results.length,
+        0
+      );
+
+      return totalFetched < lastPage.totalResults ? totalFetched : undefined;
+    },
   });
 
 export default useRecipes;
