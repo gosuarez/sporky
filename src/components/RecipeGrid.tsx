@@ -1,4 +1,4 @@
-import { Box, Button, SimpleGrid } from "@chakra-ui/react";
+import { SimpleGrid, Spinner } from "@chakra-ui/react";
 import React from "react";
 import { RecipeQuery } from "../App";
 import useRecipes from "../hooks/useRecipes";
@@ -6,29 +6,34 @@ import ApiErrorFallback from "./ApiErrorFallback";
 import RecipeCard from "./RecipeCard";
 import RecipeCardContainer from "./RecipeCardContainer";
 import RecipeCardSkeleton from "./RecipeCardSkeleton";
+import InfiniteScroll from "react-infinite-scroll-component";
 
 interface Props {
   recipeQuery: RecipeQuery;
 }
 
 const RecipeGrid = ({ recipeQuery }: Props) => {
-  const {
-    data,
-    error,
-    isLoading,
-    isFetchingNextPage,
-    fetchNextPage,
-    hasNextPage,
-  } = useRecipes(recipeQuery);
-  const skeletons = [1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12];
+  const { data, error, isLoading, fetchNextPage, hasNextPage } =
+    useRecipes(recipeQuery);
+  const skeletons = Array.from({ length: 12 }, (_, i) => i);
 
   if (error) return <ApiErrorFallback />;
 
-  console.log("hasNextPage:", hasNextPage);
+  const fetchedRecipesCount =
+    data?.pages.reduce((total, page) => total + page.results.length, 0) || 0;
 
   return (
-    <Box padding="10px">
-      <SimpleGrid columns={{ sm: 1, md: 2, lg: 3, xl: 4 }} spacing={6}>
+    <InfiniteScroll
+      dataLength={fetchedRecipesCount}
+      hasMore={!!hasNextPage}
+      next={() => fetchNextPage()}
+      loader={<Spinner />}
+    >
+      <SimpleGrid
+        columns={{ sm: 1, md: 2, lg: 3, xl: 4 }}
+        spacing={6}
+        padding="10px"
+      >
         {isLoading &&
           skeletons.map((skeleton) => (
             <RecipeCardContainer key={skeleton}>
@@ -45,12 +50,7 @@ const RecipeGrid = ({ recipeQuery }: Props) => {
           </React.Fragment>
         ))}
       </SimpleGrid>
-      {hasNextPage && (
-        <Button onClick={() => fetchNextPage()} marginY={5}>
-          {isFetchingNextPage ? "Loading..." : "Load More"}
-        </Button>
-      )}
-    </Box>
+    </InfiniteScroll>
   );
 };
 

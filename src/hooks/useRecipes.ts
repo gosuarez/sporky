@@ -3,7 +3,9 @@ import { RecipeQuery } from "../App";
 import APIClient, { FetchResponse } from "../services/apiClient";
 
 const apiClient = new APIClient<Recipe>("/recipes/complexSearch");
-const PAGE_SIZE = 10;
+const PAGE_SIZE = 20;
+const HOUR = 60 * 60 * 1000;
+const DAY = 24 * HOUR;
 
 export interface Recipe {
   id: number;
@@ -38,6 +40,7 @@ const useRecipes = (recipeQuery: RecipeQuery) =>
 
       return totalFetched < lastPage.totalResults ? totalFetched : undefined;
     },
+    staleTime: DAY,
   });
 
 export default useRecipes;
