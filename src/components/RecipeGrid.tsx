@@ -1,10 +1,10 @@
 import { SimpleGrid } from "@chakra-ui/react";
-import useRecipes from "../hooks/useRecipes";
-import RecipeCard from "./RecipeCard";
-import RecipeCardSkeleton from "./RecipeCardSkeleton";
-import RecipeCardContainer from "./RecipeCardContainer";
 import { RecipeQuery } from "../App";
+import useRecipes from "../hooks/useRecipes";
 import ApiErrorFallback from "./ApiErrorFallback";
+import RecipeCard from "./RecipeCard";
+import RecipeCardContainer from "./RecipeCardContainer";
+import RecipeCardSkeleton from "./RecipeCardSkeleton";
 
 interface Props {
   recipeQuery: RecipeQuery;

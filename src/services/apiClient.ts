@@ -1,48 +1,29 @@
 import axios, {
+  AxiosRequestConfig,
   AxiosResponse,
   InternalAxiosRequestConfig,
 } from "axios";
+import { getNextApiKey } from "./apiKeyManager";
 
 export interface FetchResponse<T> {
   number: number;
   results: T[];
 }
 
-// Load all API keys from environment variables
-const API_KEYS = [
-  import.meta.env.VITE_SPOONACULAR_API_KEY_1,
-  import.meta.env.VITE_SPOONACULAR_API_KEY_2,
-  import.meta.env.VITE_SPOONACULAR_API_KEY_3,
-  import.meta.env.VITE_SPOONACULAR_API_KEY_4,
-].filter(Boolean); // in case some are undefined
-
-if (API_KEYS.length === 0) {
-  throw new Error("No Spoonacular API keys found in environment variables.");
-}
-
-let keyIndex = 0;
-
-// A function to get the next key in round-robin style
-function getNextApiKey() {
-  const key = API_KEYS[keyIndex];
-  keyIndex = (keyIndex + 1) % API_KEYS.length;
-  return key;
-}
-
 // Create an Axios instance
-const apiClient = axios.create({
+const axiosInstance = axios.create({
   baseURL: "https://api.spoonacular.com/",
 });
 
 // Request interceptor: attach the API key dynamically
-apiClient.interceptors.request.use((config: InternalAxiosRequestConfig) => {
+axiosInstance.interceptors.request.use((config: InternalAxiosRequestConfig) => {
   if (!config.params) config.params = {};
   config.params.apiKey = getNextApiKey();
   return config;
 });
 
 // Response interceptor: retry with another key on rate-limit (402 or 429)
-apiClient.interceptors.response.use(
+axiosInstance.interceptors.response.use(
   (response: AxiosResponse) => response,
   async (error) => {
     const originalRequest = error.config;
@@ -53,11 +34,25 @@ apiClient.interceptors.response.use(
     ) {
       originalRequest._retry = true;
       originalRequest.params.apiKey = getNextApiKey();
-      return apiClient(originalRequest); // retry once
+      return axiosInstance(originalRequest); // retry once
     }
 
     return Promise.reject(error);
   }
 );
 
-export default apiClient;
+class APIClient<T> {
+  endpoint: string;
+
+  constructor(endpoint: string) {
+    this.endpoint = endpoint;
+  }
+
+  getAll = (config: AxiosRequestConfig) => {
+    return axiosInstance
+      .get<FetchResponse<T>>(this.endpoint, config)
+      .then((res) => res.data);
+  };
+}
+
+export default APIClient;

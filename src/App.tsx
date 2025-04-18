@@ -1,14 +1,14 @@
 import { Box, Grid, GridItem, HStack, Show } from "@chakra-ui/react";
+import { useState } from "react";
+import DietSelector from "./components/DietSelector";
+import MealTypeList from "./components/MealTypeList";
 import NavBar from "./components/NavBar";
 import RecipeGrid from "./components/RecipeGrid";
-import MealTypeList from "./components/MealTypeList";
-import { useState } from "react";
-import { MealType } from "./hooks/useMealTypes";
-import DietSelector from "./components/DietSelector";
-import { Diet } from "./hooks/useDiets";
-import SortSelector from "./components/SortSelector";
-import { Sort } from "./hooks/useSort";
 import RecipeHeading from "./components/RecipeHeading";
+import SortSelector from "./components/SortSelector";
+import { Diet } from "./hooks/useDiets";
+import { MealType } from "./hooks/useMealTypes";
+import { Sort } from "./hooks/useSort";
 
 export interface RecipeQuery {
   type: MealType | null;

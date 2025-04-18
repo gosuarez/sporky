@@ -1,7 +1,8 @@
 import { useQuery } from "@tanstack/react-query";
 import { RecipeQuery } from "../App";
-import apiClient, { FetchResponse } from "../services/api-client";
+import APIClient, { FetchResponse } from "../services/apiClient";
 
+const apiClient = new APIClient<Recipe>("/recipes/complexSearch");
 
 export interface Recipe {
   id: number;
@@ -16,18 +17,16 @@ const useRecipes = (recipeQuery: RecipeQuery) =>
   useQuery<FetchResponse<Recipe>, Error>({
     queryKey: ["recipes", recipeQuery],
     queryFn: () =>
-      apiClient
-        .get<FetchResponse<Recipe>>("/recipes/complexSearch", {
-          params: {
-            number: 20,
-            addRecipeInformation: true,
-            type: recipeQuery.type?.id,
-            diet: recipeQuery.diet?.id,
-            sort: recipeQuery.sort?.id,
-            query: recipeQuery.searchText,
-          },
-        })
-        .then((res) => res.data),
+      apiClient.getAll({
+        params: {
+          number: 20,
+          addRecipeInformation: true,
+          type: recipeQuery.type?.id,
+          diet: recipeQuery.diet?.id,
+          sort: recipeQuery.sort?.id,
+          query: recipeQuery.searchText,
+        },
+      }),
   });
 
 export default useRecipes;
