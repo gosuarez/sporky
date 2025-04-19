@@ -11,10 +11,13 @@ import useMealTypes, { MealType } from "../hooks/useMealTypes";
 
 interface Props {
   onSelectMeal: (type: MealType) => void;
-  selectedMealType: MealType | null;
+  selectedMealTypeId?: string;
 }
 
-const MealTypeList = ({ selectedMealType, onSelectMeal }: Props) => {
+const MealTypeList = ({
+  selectedMealTypeId,
+  onSelectMeal,
+}: Props) => {
   const mealTypes = useMealTypes();
   const mealLabelColor = useColorModeValue("#2e2a27", "#e9e4d2");
 
@@ -25,7 +28,7 @@ const MealTypeList = ({ selectedMealType, onSelectMeal }: Props) => {
       </Heading>
       <List>
         {mealTypes.map((type) => {
-          const isSelected = type.id === selectedMealType?.id;
+          const isSelected = type.id === selectedMealTypeId;
 
           return (
             <ListItem key={type.id} paddingY="5px">

@@ -6,14 +6,11 @@ import NavBar from "./components/NavBar";
 import RecipeGrid from "./components/RecipeGrid";
 import RecipeHeading from "./components/RecipeHeading";
 import SortSelector from "./components/SortSelector";
-import { Diet } from "./hooks/useDiets";
-import { MealType } from "./hooks/useMealTypes";
-import { Sort } from "./hooks/useSort";
 
 export interface RecipeQuery {
-  type: MealType | null;
-  diet: Diet | null;
-  sort: Sort | null;
+  typeId?: string;
+  dietId?: string;
+  sortId?: string;
   searchText: string;
 }
 
@@ -43,8 +40,10 @@ function App() {
       <Show above="lg">
         <GridItem area="aside" paddingX={5}>
           <MealTypeList
-            selectedMealType={recipeQuery.type}
-            onSelectMeal={(type) => setRecipeQuery({ ...recipeQuery, type })}
+            selectedMealTypeId={recipeQuery.typeId}
+            onSelectMeal={(type) =>
+              setRecipeQuery({ ...recipeQuery, typeId: type.id })
+            }
           />
         </GridItem>
       </Show>
@@ -53,13 +52,15 @@ function App() {
           <RecipeHeading recipeQuery={recipeQuery} />
           <HStack spacing={2} marginBottom={4}>
             <DietSelector
-              selectedDiet={recipeQuery.diet}
-              onSelectDiet={(diet) => setRecipeQuery({ ...recipeQuery, diet })}
+              selectedDietId={recipeQuery.dietId}
+              onSelectDiet={(diet) =>
+                setRecipeQuery({ ...recipeQuery, dietId: diet.id })
+              }
             />
             <SortSelector
-              selectedOrder={recipeQuery.sort}
+              selectedOrderId={recipeQuery.sortId}
               onSelectSortOrder={(sort) =>
-                setRecipeQuery({ ...recipeQuery, sort })
+                setRecipeQuery({ ...recipeQuery, sortId: sort.id })
               }
             />
           </HStack>

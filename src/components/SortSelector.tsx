@@ -4,11 +4,15 @@ import useSort, { Sort } from "../hooks/useSort";
 
 interface Props {
   onSelectSortOrder: (sortOrder: Sort) => void;
-  selectedOrder: Sort | null;
+  selectedOrderId?: string;
 }
 
-const SortSelector = ({ onSelectSortOrder, selectedOrder }: Props) => {
+const SortSelector = ({
+  onSelectSortOrder,
+  selectedOrderId,
+}: Props) => {
   const sorts = useSort();
+  const selectedOrder = sorts?.find((t) => t.id === selectedOrderId);
 
   return (
     <Menu>

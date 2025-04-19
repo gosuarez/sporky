@@ -4,11 +4,15 @@ import useDiets, { Diet } from "../hooks/useDiets";
 
 interface Props {
   onSelectDiet: (diet: Diet) => void;
-  selectedDiet: Diet | null;
+  selectedDietId?: string;
 }
 
-const DietSelector = ({ onSelectDiet, selectedDiet }: Props) => {
+const DietSelector = ({
+  onSelectDiet,
+  selectedDietId,
+}: Props) => {
   const diets = useDiets();
+  const selectedDiet = diets?.find((d) => d.id === selectedDietId);
 
   return (
     <Menu>
