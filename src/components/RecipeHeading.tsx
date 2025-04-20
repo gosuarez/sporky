@@ -1,18 +1,16 @@
 import { Heading } from "@chakra-ui/react";
 import { RecipeQuery } from "../App";
-import useMealTypes from "../hooks/useMealTypes";
-import useDiets from "../hooks/useDiets";
+import { getById } from "../utils/getById";
+import { allDiets } from "../data/diets";
+import { allMealTypes } from "../data/mealTypes";
 
 interface Props {
   recipeQuery: RecipeQuery;
 }
 
 const RecipeHeading = ({ recipeQuery }: Props) => {
-  const types = useMealTypes();
-  const type = types?.find((t) => t.id === recipeQuery.typeId);
-
-  const diets = useDiets();
-  const selectedDiet = diets?.find((d) => d.id === recipeQuery.dietId);
+const selectedDiet = getById(allDiets, recipeQuery.dietId);
+const type = getById(allMealTypes, recipeQuery.typeId);
 
   const heading = `${selectedDiet?.label || ""} ${type?.label || ""} Recipes`;
 

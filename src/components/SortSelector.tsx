@@ -1,18 +1,17 @@
 import { Button, Menu, MenuButton, MenuItem, MenuList } from "@chakra-ui/react";
 import { BsChevronDown } from "react-icons/bs";
-import useSort, { Sort } from "../hooks/useSort";
+import useSort from "../hooks/useSort";
+import { Sort } from "../data/sorts";
+import { getById } from "../utils/getById";
 
 interface Props {
   onSelectSortOrder: (sortOrder: Sort) => void;
   selectedOrderId?: string;
 }
 
-const SortSelector = ({
-  onSelectSortOrder,
-  selectedOrderId,
-}: Props) => {
+const SortSelector = ({ onSelectSortOrder, selectedOrderId }: Props) => {
   const sorts = useSort();
-  const selectedOrder = sorts?.find((t) => t.id === selectedOrderId);
+  const selectedOrder = getById(sorts, selectedOrderId);
 
   return (
     <Menu>

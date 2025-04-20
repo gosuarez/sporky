@@ -7,17 +7,15 @@ import {
   Button,
   Heading,
 } from "@chakra-ui/react";
-import useMealTypes, { MealType } from "../hooks/useMealTypes";
+import useMealTypes from "../hooks/useMealTypes";
+import { MealType } from "../data/mealTypes";
 
 interface Props {
   onSelectMeal: (type: MealType) => void;
   selectedMealTypeId?: string;
 }
 
-const MealTypeList = ({
-  selectedMealTypeId,
-  onSelectMeal,
-}: Props) => {
+const MealTypeList = ({ selectedMealTypeId, onSelectMeal }: Props) => {
   const mealTypes = useMealTypes();
   const mealLabelColor = useColorModeValue("#2e2a27", "#e9e4d2");
 

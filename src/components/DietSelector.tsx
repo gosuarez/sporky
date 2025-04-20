@@ -1,18 +1,17 @@
 import { Button, Menu, MenuButton, MenuItem, MenuList } from "@chakra-ui/react";
 import { BsChevronDown } from "react-icons/bs";
-import useDiets, { Diet } from "../hooks/useDiets";
+import { Diet } from "../data/diets";
+import useDiets from "../hooks/useDiets";
+import { getById } from "../utils/getById";
 
 interface Props {
   onSelectDiet: (diet: Diet) => void;
   selectedDietId?: string;
 }
 
-const DietSelector = ({
-  onSelectDiet,
-  selectedDietId,
-}: Props) => {
+const DietSelector = ({ onSelectDiet, selectedDietId }: Props) => {
   const diets = useDiets();
-  const selectedDiet = diets?.find((d) => d.id === selectedDietId);
+  const selectedDiet = getById(diets, selectedDietId);
 
   return (
     <Menu>
