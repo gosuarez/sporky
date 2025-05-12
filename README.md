@@ -1,6 +1,6 @@
 # Sporky
 
-**Sporky** is a modern recipe discovery web application built with **React**, **TypeScript**, and **Vite**. It helps users explore meals tailored to their dietary preferences and meal types, featuring a clean UI, responsive layout, and intuitive search and filtering. Data is fetched from the [Spoonacular API](https://spoonacular.com/food-api) using a custom Axios client, and the project is deployed via [Vercel](https://vercel.com/) for a seamless production experience.
+**Sporky** is a modern recipe discovery web application built with **React**, **TypeScript**, and **Vite**. It helps users explore meals tailored to their dietary preferences and meal types, featuring a clean UI, responsive layout, and intuitive search and filtering. Data is fetched from the [Spoonacular API](https://spoonacular.com/food-api) using a custom Axios client **integrated with React Query** for intelligent caching and infinite scrolling. The project is deployed via [Vercel](https://vercel.com/) for a seamless production experience.
 
 ## Live Demo
 
@@ -17,19 +17,22 @@
 - **Visual Metadata Icons**: Icons clearly indicate prep time, servings, and health score.
 - **Robust API Handling**: Custom Axios client with built-in error handling for reliable requests.
 - **SEO-Ready Metadata**: Custom favicons and Open Graph tags enhance social sharing and search appearance.
+- **Smart Caching with React Query**: Uses React Query to manage API state, cache responses, reduce over-fetching, and improve performance.
+- **Infinite Scrolling**: Recipes load automatically as users scroll, powered by `useInfiniteQuery` from React Query.
 
 ## Tech Stack
 
-| Technology                                                | Purpose                                   |
-| --------------------------------------------------------- | ----------------------------------------- |
-| [Vite](https://vitejs.dev/)                               | Fast local development and build tooling  |
-| [React](https://reactjs.org/)                             | UI framework for building component views |
-| [TypeScript](https://www.typescriptlang.org/)             | Static typing and tooling                 |
-| [Chakra UI](https://chakra-ui.com/)                       | Responsive component library with theming |
-| [Axios](https://axios-http.com/)                          | API requests with error handling          |
-| [Spoonacular API](https://spoonacular.com/food-api)       | External recipe data provider             |
-| [React Icons](https://react-icons.github.io/react-icons/) | Visual UI indicators                      |
-| [Vercel](https://vercel.com/)                             | Hosting and continuous deployment         |
+| Technology                                                | Purpose                                        |
+| --------------------------------------------------------- | ---------------------------------------------- |
+| [Vite](https://vitejs.dev/)                               | Fast local development and build tooling       |
+| [React](https://reactjs.org/)                             | UI framework for building component views      |
+| [TypeScript](https://www.typescriptlang.org/)             | Static typing and tooling                      |
+| [Chakra UI](https://chakra-ui.com/)                       | Responsive component library with theming      |
+| [Axios](https://axios-http.com/)                          | API requests (used with React Query)           |
+| [React Query](https://tanstack.com/query/latest)          | Caching, pagination, and API state management  |
+| [Spoonacular API](https://spoonacular.com/food-api)       | External recipe data provider                  |
+| [React Icons](https://react-icons.github.io/react-icons/) | Visual UI indicators                           |
+| [Vercel](https://vercel.com/)                             | Hosting and continuous deployment              |
 
 ## Getting Started
 
@@ -43,7 +46,6 @@
 ### Installation
 
 1. Clone the repo and install dependencies:
-
 ```bash
 git clone https://github.com/gosuarez/sporky.git
 cd sporky
@@ -52,7 +54,7 @@ npm install
 2. Get a [spoonacular API Key](https://spoonacular.com/food-api). You'll have to create an account firts.
 3. Add the API key to `src/services/api-client.ts` or `.env` file.
 
-### Running the App Locally 
+### Running the App Locally
 
 ```bash
 npm run dev
